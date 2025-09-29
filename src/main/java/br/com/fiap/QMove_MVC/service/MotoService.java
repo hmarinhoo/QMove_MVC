@@ -1,33 +1,34 @@
-package main.java.br.com.fiap.QMove_MVC.service;
+package br.com.fiap.QMove_MVC.service;
+
+import br.com.fiap.QMove_MVC.model.Moto;
+import br.com.fiap.QMove_MVC.repository.MotoRepository;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import br.com.echobeacon.model.Moto;
-import br.com.echobeacon.repository.MotoRepository;
-
 @Service
 public class MotoService {
 
-    @Autowired
-    private MotoRepository motoRepository;
+    private final MotoRepository motoRepository;
 
-    public Moto salvar(Moto moto) {
-        return motoRepository.save(moto);
+    public MotoService(MotoRepository motoRepository) {
+        this.motoRepository = motoRepository;
     }
 
-    public List<Moto> listarTodos() {
+    public List<Moto> findAll() {
         return motoRepository.findAll();
     }
 
-    public Optional<Moto> buscarPorId(Long id) {
+    public Optional<Moto> findById(Long id) {
         return motoRepository.findById(id);
     }
 
-    public void excluir(Long id) {
+    public Moto save(Moto moto) {
+        return motoRepository.save(moto);
+    }
+
+    public void deleteById(Long id) {
         motoRepository.deleteById(id);
     }
 }

@@ -1,4 +1,4 @@
-package main.java.br.com.fiap.QMove_MVC.auth;
+package br.com.fiap.QMove_MVC.auth;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;

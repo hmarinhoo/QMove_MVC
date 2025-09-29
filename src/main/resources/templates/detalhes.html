@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: head(title='Detalhes Veículos')"></head>
+<body>
+<div class="container">
+
+    <div class="header">
+        <h2>DETALHES</h2>
+        <a class="btnAdd" th:href="@{/motos/cadastro}">+</a>
+    </div>
+
+    <h3>Veículos por Setor</h3>
+
+    <div th:if="${#lists.isEmpty(veiculosPorSetor)}">
+        <p class="errorText">Nenhum setor cadastrado.</p>
+    </div>
+
+    <div th:each="setor, motos : ${veiculosPorSetor}">
+        <h4 th:text="${setor}"></h4>
+        <div th:each="moto : ${motos}" class="card">
+            <p><strong>Placa: </strong><span th:text="${moto.placa}"></span></p>
+            <p><strong>Setor Atual: </strong><span th:text="${moto.ultimoSetor}">—</span></p>
+        </div>
+    </div>
+
+</div>
+
+<div th:replace="fragments/footer :: footer"></div>
+
+<style>
+    body {
+        background-color: black;
+        color: white;
+        font-family: Arial, sans-serif;
+    }
+    .container {
+        padding: 20px;
+        min-height: 100vh;
+    }
+    .header {
+        background-color: #52764B;
+        border-bottom-left-radius: 40px;
+        border-bottom-right-radius: 40px;
+        height: 90px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+    }
+    .header h2 {
+        margin: 0;
+    }
+    .btnAdd {
+        position: absolute;
+        right: 20px;
+        top: 25px;
+        background-color: #52864B;
+        width: 36px;
+        height: 36px;
+        border-radius: 18px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        color: white;
+        font-size: 24px;
+        font-weight: bold;
+    }
+    h3 {
+        margin-top: 20px;
+        margin-bottom: 10px;
+        font-weight: bold;
+    }
+    h4 {
+        margin-bottom: 8px;
+        font-weight: bold;
+    }
+    .card {
+        background-color: #f2f2f2;
+        color: black;
+        padding: 10px;
+        margin-bottom: 10px;
+        border-radius: 10px;
+    }
+    .errorText {
+        font-style: italic;
+    }
+</style>
+</body>
+</html>

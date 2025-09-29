@@ -1,10 +1,10 @@
-package main.java.br.com.fiap.QMove_MVC.model;
+package br.com.fiap.QMove_MVC.model;
 
 import java.time.LocalDateTime;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import br.com.fiap.qmove.model.enums.Tipo;
+import br.com.fiap.QMove_MVC.model.enums.Tipo;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;

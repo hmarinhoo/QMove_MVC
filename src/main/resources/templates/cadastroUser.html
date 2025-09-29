@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: head(title='Cadastro de Funcionário')"></head>
+<body>
+<div class="container">
+
+    <h2>Boas-vindas!</h2>
+    <p>Cadastre-se para começar a gerenciar seu pátio.</p>
+
+    <form th:action="@{/usuarios/cadastro}" method="post">
+        <label for="nome">Nome</label>
+        <input type="text" id="nome" name="nome" placeholder="Digite seu nome" required 
+               th:value="${funcionario.nome}">
+
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" placeholder="Digite seu email" required 
+               th:value="${funcionario.email}">
+
+        <label for="senha">Senha</label>
+        <input type="password" id="senha" name="senha" placeholder="Digite sua senha" required>
+
+        <button type="submit">Cadastrar</button>
+    </form>
+
+    <p>Já possui conta? 
+        <a th:href="@{/login}">Fazer login</a>
+    </p>
+
+    <!-- Mensagem de erro -->
+    <div th:if="${erro}" style="color:red;">
+        <p th:text="${erro}"></p>
+    </div>
+
+    <!-- Mensagem de sucesso -->
+    <div th:if="${sucesso}" style="color:green;">
+        <p th:text="${sucesso}"></p>
+    </div>
+
+</div>
+
+<div th:replace="fragments/footer :: footer"></div>
+</body>
+</html>

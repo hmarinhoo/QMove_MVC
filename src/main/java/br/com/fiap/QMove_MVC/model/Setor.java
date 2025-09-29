@@ -1,4 +1,4 @@
-package main.java.br.com.fiap.QMove_MVC.model;
+package br.com.fiap.QMove_MVC.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;

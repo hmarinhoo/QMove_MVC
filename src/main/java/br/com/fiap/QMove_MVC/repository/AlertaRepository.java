@@ -1,8 +1,7 @@
-package main.java.br.com.fiap.QMove_MVC.repository;
+package br.com.fiap.QMove_MVC.repository;
 
-import br.com.fiap.qmove.model.Alerta;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+import br.com.fiap.QMove_MVC.model.Alerta;
 
-public interface AlertaRepository extends JpaRepository<Alerta, Long>, JpaSpecificationExecutor<Alerta> {
+public interface AlertaRepository extends JpaRepository<Alerta, Long> {
 }

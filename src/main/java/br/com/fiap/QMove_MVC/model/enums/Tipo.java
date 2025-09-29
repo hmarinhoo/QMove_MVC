@@ -1,4 +1,4 @@
-package main.java.br.com.fiap.QMove_MVC.model.enums;
+package br.com.fiap.QMove_MVC.model.enums;
 
 // Tipo de Alerta
 public enum Tipo {

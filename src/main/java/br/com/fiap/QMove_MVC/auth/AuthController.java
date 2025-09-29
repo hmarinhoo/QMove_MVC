@@ -1,4 +1,4 @@
-package main.java.br.com.fiap.QMove_MVC.auth;
+package br.com.fiap.QMove_MVC.auth;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

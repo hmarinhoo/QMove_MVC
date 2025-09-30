@@ -35,7 +35,7 @@ public class FuncionarioService {
 
     public Funcionario register(OAuth2User user) {
         String email = user.getAttribute("email");
-        Optional<Funcionario> optionalFuncionario = funcionarioRepository.findByEmail(email);
+        Optional<Funcionario> optionalFuncionario = Optional.of(funcionarioRepository.findByEmail(email));
 
         if (optionalFuncionario.isEmpty()) {
             Funcionario novoFuncionario = new Funcionario();

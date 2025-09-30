@@ -7,7 +7,7 @@
     <h2>Boas-vindas!</h2>
     <p>Cadastre-se para começar a gerenciar seu pátio.</p>
 
-    <form th:action="@{/usuarios/cadastro}" method="post">
+    <form th:action="@{/funcionarios}" method="post">
         <label for="nome">Nome</label>
         <input type="text" id="nome" name="nome" placeholder="Digite seu nome" required 
                th:value="${funcionario.nome}">
@@ -23,7 +23,7 @@
     </form>
 
     <p>Já possui conta? 
-        <a th:href="@{/login}">Fazer login</a>
+        <a th:href="@{/funcionarios/login}">Fazer login</a>
     </p>
 
     <!-- Mensagem de erro -->

@@ -56,4 +56,26 @@ public class FuncionarioController {
         funcionarioRepository.deleteById(id);
         return "redirect:/funcionarios";
     }
+
+    @GetMapping("/login")
+    public String loginForm(Model model) {
+        model.addAttribute("funcionario", new Funcionario());
+        return "funcionario/login"; // HTML do login
+    }
+
+    @PostMapping("/login")
+    public String login(@RequestParam String email,
+        @RequestParam String senha,
+        Model model) {
+        Funcionario funcionario = funcionarioRepository.findByEmail(email);
+    
+        if (funcionario != null && funcionario.getSenha().equals(senha)) {
+            // login válido
+            return "redirect:/funcionarios"; // manda para lista
+        } else {
+            model.addAttribute("erro", "Email ou senha inválidos!");
+            return "funcionario/login"; // volta pro form com erro
+        }
+    }
+
 }

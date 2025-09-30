@@ -2,7 +2,6 @@ package br.com.fiap.QMove_MVC.controller;
 
 import br.com.fiap.QMove_MVC.model.Moto;
 import br.com.fiap.QMove_MVC.repository.MotoRepository;
-import br.com.fiap.QMove_MVC.repository.QrcodeRepository;
 import br.com.fiap.QMove_MVC.repository.SetorRepository;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,10 +20,6 @@ public class MotoController {
     @Autowired
     private SetorRepository setorRepository;
 
-    @Autowired
-    private QrcodeRepository qrcodeRepository;
-
-    @GetMapping
     public String listar(Model model) {
         model.addAttribute("motos", motoRepository.findAll());
         return "moto/listar";
@@ -42,9 +37,6 @@ public class MotoController {
         if (result.hasErrors()) {
             model.addAttribute("setores", setorRepository.findAll());
             return "moto/form";
-        }
-        if (moto.getQrcode() != null) {
-            qrcodeRepository.save(moto.getQrcode());
         }
         motoRepository.save(moto);
         return "redirect:/motos";

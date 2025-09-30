@@ -1,16 +1,11 @@
 package br.com.fiap.QMove_MVC.model;
 
-import java.util.List;
-
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
@@ -32,14 +27,9 @@ public class Moto {
     @NotBlank(message = "O campo 'status' é obrigatório")
     private String status;
 
-    @OneToOne(cascade = CascadeType.ALL) 
-    @JoinColumn(name = "qrcode_id") 
-    private Qrcode qrcode;
-
     @ManyToOne
     @JoinColumn(name = "setor_id_setor")
     private Setor setor;
 
-    @OneToMany(mappedBy = "moto")
-    private List<Alerta> alertas;
+
 }

@@ -33,6 +33,4 @@ public class Setor {
     @JsonIgnore
         private List<Moto> motos = new ArrayList<>();  // <-- INICIALIZA AQUI
 
-    @OneToMany(mappedBy = "setor", cascade = CascadeType.ALL)
-    private List<Alerta> alertas;
 }

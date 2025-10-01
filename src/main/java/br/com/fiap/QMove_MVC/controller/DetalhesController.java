@@ -26,16 +26,15 @@ public class DetalhesController {
     public String detalhes(Model model) {
         Map<String, List<Moto>> veiculosPorSetor = new HashMap<>();
 
-        // Busca todos os setores
         List<Setor> setores = setorRepository.findAll();
-
-        // Para cada setor, pega as motos relacionadas (usando o setor_id da moto)
         for (Setor setor : setores) {
             List<Moto> motos = motoRepository.findBySetor(setor);
             veiculosPorSetor.put(setor.getNome(), motos);
         }
 
         model.addAttribute("veiculosPorSetor", veiculosPorSetor);
-        return "detalhes";
+        model.addAttribute("conteudo", "detalhes :: conteudo"); // fragmento da página
+        return "layout"; // sempre retorna layout
     }
+
 }

@@ -1,0 +1,53 @@
+<div th:fragment="conteudo">
+    <h1>Cadastro de Motos</h1>
+
+    <!-- Formulário de cadastro/edição -->
+    <form th:action="@{/motos/salvar}" th:object="${moto}" method="post">
+        <label>Placa:</label>
+        <input type="text" th:field="*{placa}" required/>
+
+        <label>Modelo:</label>
+        <input type="text" th:field="*{modelo}" required/>
+
+        <label>Status:</label>
+        <select th:field="*{status}">
+            <option value="Disponível">Disponível</option>
+            <option value="Indisponível">Indisponível</option>
+        </select>
+
+        <label>Setor:</label>
+        <select th:field="*{setor}" required>
+            <option th:each="setor : ${setores}" th:value="${setor}" th:text="${setor.nome}"></option>
+        </select>
+
+        <button type="submit">Salvar</button>
+    </form>
+
+    <hr/>
+
+    <!-- Lista de motos cadastradas -->
+    <h2>Motos Cadastradas</h2>
+    <table border="1" cellpadding="8" cellspacing="0">
+        <thead>
+            <tr>
+                <th>Placa</th>
+                <th>Modelo</th>
+                <th>Status</th>
+                <th>Setor</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="moto : ${motos}">
+                <td th:text="${moto.placa}"></td>
+                <td th:text="${moto.modelo}"></td>
+                <td th:text="${moto.status}"></td>
+                <td th:text="${moto.setor.nome}"></td>
+                <td>
+                    <a th:href="@{/motos/editar/{id}(id=${moto.id})}">Editar</a> |
+                    <a th:href="@{/motos/excluir/{id}(id=${moto.id})}" onclick="return confirm('Deseja realmente excluir?')">Excluir</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

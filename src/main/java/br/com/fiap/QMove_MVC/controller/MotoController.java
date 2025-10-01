@@ -10,7 +10,6 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-
 @Controller
 @RequestMapping("/motos")
 public class MotoController {
@@ -21,46 +20,54 @@ public class MotoController {
     @Autowired
     private SetorRepository setorRepository;
 
-    // LISTAR MOTOS
-    @GetMapping
-    public String listar(Model model) {
-        model.addAttribute("motos", motoService.findAll());
-        return "moto/listar"; // -> resources/templates/moto/listar.html
-    }
-
-    // FORM NOVA MOTO
+    // --- EXIBIR FORMULÁRIO + LISTA ---
     @GetMapping("/nova")
     public String nova(Model model) {
         model.addAttribute("moto", new Moto());
         model.addAttribute("setores", setorRepository.findAll());
-        model.addAttribute("conteudo", "motos/form :: conteudo");
-        return "layout"; 
+        model.addAttribute("motos", motoService.findAll());
+        model.addAttribute("conteudo", "motos/form :: conteudo"); // fragmento do formulário + lista
+        return "layout";
     }
 
-    // SALVAR
+
+    // --- SALVAR NOVA MOTO ---
     @PostMapping
     public String salvar(@Valid Moto moto, BindingResult result, Model model) {
         if (result.hasErrors()) {
             model.addAttribute("setores", setorRepository.findAll());
-            return "moto/form";
+            model.addAttribute("motos", motoService.findAll());
+            model.addAttribute("conteudo", "motos/form :: conteudo");
+            return "layout";
         }
         motoService.save(moto);
-        return "redirect:/motos";
+        return "redirect:/motos/nova";
     }
 
-    // EDITAR
+    // --- EDITAR MOTO ---
     @GetMapping("/{id}/editar")
     public String editar(@PathVariable Long id, Model model) {
         Moto moto = motoService.findById(id).orElseThrow();
         model.addAttribute("moto", moto);
         model.addAttribute("setores", setorRepository.findAll());
-        return "moto/form";
+        model.addAttribute("motos", motoService.findAll());
+        model.addAttribute("conteudo", "motos/form :: conteudo");
+        return "layout";
     }
 
-    // EXCLUIR
+
+    // --- EXCLUIR MOTO ---
     @GetMapping("/{id}/excluir")
     public String excluir(@PathVariable Long id) {
         motoService.deleteById(id);
-        return "redirect:/motos";
+        return "redirect:/motos/nova";
+    }
+
+    // --- LISTAR TODAS AS MOTOS (opcional, caso queira página separada) ---
+    @GetMapping
+    public String listar(Model model) {
+        model.addAttribute("motos", motoService.findAll());
+        model.addAttribute("conteudo", "motos/listar :: conteudo");
+        return "layout";
     }
 }

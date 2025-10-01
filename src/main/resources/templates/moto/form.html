@@ -1,0 +1,31 @@
+<div th:fragment="conteudo">
+    <h1>Cadastrar Nova Moto</h1>
+
+    <form th:action="@{/motos}" th:object="${moto}" method="post">
+        <div>
+            <label>Placa:</label>
+            <input type="text" th:field="*{placa}" required/>
+        </div>
+
+        <div>
+            <label>Modelo:</label>
+            <input type="text" th:field="*{modelo}" required/>
+        </div>
+
+        <div>
+            <label>Status:</label>
+            <input type="text" th:field="*{status}" required/>
+        </div>
+
+        <div>
+            <label>Setor:</label>
+            <select th:field="*{setor}" required>
+                <option th:each="setor : ${setores}" th:value="${setor}" th:text="${setor.nome}"></option>
+            </select>
+        </div>
+
+        <div>
+            <button type="submit">Salvar</button>
+        </div>
+    </form>
+</div>

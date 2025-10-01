@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>QMove</title>
+    <link rel="stylesheet" href="/css/style.css"/>
+</head>
+<body>
+    <header>
+        <nav>
+            <a th:href="@{/motos/nova}">Motos</a> |
+            <a th:href="@{/setores/detalhes}">Setores</a> |
+            <a th:href="@{/logout}">Logout</a>
+        </nav>
+    </header>
+
+    <!-- Conteúdo das páginas será inserido aqui -->
+    <main th:insert="${conteudo}"></main>
+</body>
+</html>

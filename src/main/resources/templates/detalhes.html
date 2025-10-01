@@ -1,32 +1,61 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments/header :: head(title='Detalhes Veículos')"></head>
+<head>
+    <meta charset="UTF-8">
+    <title>Detalhes de Veículos</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .setor {
+            margin-bottom: 30px;
+            background-color: #fff;
+            padding: 15px 20px;
+            border-radius: 8px;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+        }
+        .setor h2 {
+            margin-bottom: 15px;
+        }
+        .moto {
+            border-top: 1px solid #ddd;
+            padding: 10px 0;
+        }
+        .moto:first-child {
+            border-top: none;
+        }
+        .moto p {
+            margin: 2px 0;
+        }
+    </style>
+</head>
 <body>
-<div class="container">
-
-    <div class="header">
-        <h2>DETALHES</h2>
-        <a class="btnAdd" th:href="@{/motos/novo}">+</a>
-    </div>
-
-    <h3>Veículos por Setor</h3>
+    <h1>Veículos por Setor</h1>
 
     <div th:if="${#maps.isEmpty(veiculosPorSetor)}">
-        <p class="errorText">Nenhum setor cadastrado.</p>
+        <p>Nenhum setor cadastrado.</p>
     </div>
 
     <div th:each="entry : ${veiculosPorSetor}">
-        <h4 th:text="${entry.key.nome}"></h4>
-        <div th:each="moto : ${entry.value}" class="card">
-            <p><strong>Placa: </strong><span th:text="${moto.placa}"></span></p>
-            <p><strong>Setor Atual: </strong><span th:text="${moto.setor.nome}">—</span></p>
-            <a th:href="@{'/motos/' + ${moto.id} + '/editar'}">Editar</a>
-            <a th:href="@{'/motos/' + ${moto.id} + '/excluir'}">Excluir</a>
+        <div class="setor">
+            <h2 th:text="${entry.key}">Nome do Setor</h2>
+
+            <div th:if="${#lists.isEmpty(entry.value)}">
+                <p>Não há motos neste setor.</p>
+            </div>
+
+            <div th:each="moto : ${entry.value}" class="moto">
+                <p><strong>Placa:</strong> <span th:text="${moto.placa}">ABC1234</span></p>
+                <p><strong>Modelo:</strong> <span th:text="${moto.modelo}">Mottu Sport</span></p>
+                <p><strong>Status:</strong> <span th:text="${moto.status}">Disponível</span></p>
+            </div>
         </div>
     </div>
-
-</div>
-
-<div th:replace="fragments/footer :: footer"></div>
 </body>
 </html>

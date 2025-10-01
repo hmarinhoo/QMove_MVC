@@ -4,6 +4,9 @@ import br.com.fiap.QMove_MVC.model.Funcionario;
 import br.com.fiap.QMove_MVC.repository.FuncionarioRepository;
 import br.com.fiap.QMove_MVC.repository.SetorRepository;
 import jakarta.validation.Valid;
+
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -65,17 +68,19 @@ public class FuncionarioController {
 
     @PostMapping("/login")
     public String login(@RequestParam String email,
-        @RequestParam String senha,
-        Model model) {
-        Funcionario funcionario = funcionarioRepository.findByEmail(email);
-    
-        if (funcionario != null && funcionario.getSenha().equals(senha)) {
+                        @RequestParam String senha,
+                        Model model) {
+        Optional<Funcionario> funcionarioOpt = funcionarioRepository.findByEmail(email);
+
+        if (funcionarioOpt.isPresent() && funcionarioOpt.get().getSenha().equals(senha)) {
             // login válido
             return "redirect:/funcionarios"; // manda para lista
         } else {
             model.addAttribute("erro", "Email ou senha inválidos!");
             return "funcionario/login"; // volta pro form com erro
-        }
+    }
+}
+
     }
 
-}
+

@@ -28,7 +28,7 @@ public class Moto {
     private String status;
 
     @ManyToOne
-    @JoinColumn(name = "setor_id_setor")
+    @JoinColumn(name = "setor_id")
     private Setor setor;
 
 

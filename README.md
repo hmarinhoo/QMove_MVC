@@ -42,7 +42,7 @@ Antes de executar a aplicação, certifique-se de ter instalado:
 ```bash
 git clone https://github.com/hmarinhoo/QMove_MVC
 cd QMove_MVC
-
+'''
 
 2. Configuração da Autenticação com GitHub (OAuth2)
 
@@ -85,3 +85,4 @@ spring.security.oauth2.client.registration.github.client-secret=SEU_CLIENT_SECRE
 
 
 Substitua SEU_CLIENT_ID_AQUI e SEU_CLIENT_SECRET_AQUI pelos valores copiados do GitHub.
+

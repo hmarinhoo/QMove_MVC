@@ -1,36 +1,58 @@
 package br.com.fiap.QMove_MVC.model;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import lombok.Data;
 
-import java.util.ArrayList;
+import lombok.Data;
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
-@Entity
 @Data
+@Entity
+@Table(name = "setor")
 public class Setor {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank(message = "O campo 'nome' é obrigatório")
+    @Column(nullable = false)
     private String nome;
-    
-    @NotNull(message = "O campo 'codigo é obrigatório")
+
     private String codigo;
 
-    @ManyToMany
-    @JoinTable(
-        name = "setor_moto",
-        joinColumns = @JoinColumn(name = "setor_id"),
-        inverseJoinColumns = @JoinColumn(name = "moto_id")
-    )
-    @JsonIgnore
-        private List<Moto> motos = new ArrayList<>();  // <-- INICIALIZA AQUI
+    // Um setor pode ter várias motos
+    @OneToMany(mappedBy = "setor")
+    private List<Moto> motos;
 
+    // Getters e Setters
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
+    }
+
+    public List<Moto> getMotos() {
+        return motos;
+    }
+
+    public void setMotos(List<Moto> motos) {
+        this.motos = motos;
+    }
 }

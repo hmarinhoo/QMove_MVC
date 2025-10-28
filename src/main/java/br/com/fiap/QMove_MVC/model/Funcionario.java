@@ -1,27 +1,46 @@
 package br.com.fiap.QMove_MVC.model;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.Table;
 import lombok.Data;
-
-@Entity
 @Data
+@Entity
+@Table(name = "funcionario")
 public class Funcionario {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    
-    @NotBlank(message = "O campo 'nome' é obrigatório")
+
+    @Column(nullable = false)
     private String nome;
-        
-    @NotBlank(message = "O campo 'email' é obrigatório")
+
+    @Column(unique = true, nullable = false)
     private String email;
-    
-    @NotBlank(message = "O campo 'senha' é obrigatório")
-    @Size(min = 8, max = 10, message = "Deve ter entre 8 e 10 caracteres.")
+
+    @Column(nullable = false)
     private String senha;
+
+    private boolean ativo = true;
+
+    // Relação N:N com Role
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+        name = "funcionario_roles",
+        joinColumns = @JoinColumn(name = "funcionario_id"),
+        inverseJoinColumns = @JoinColumn(name = "role_id")
+    )
+    private Set<Role> roles = new HashSet<>();
+
 }

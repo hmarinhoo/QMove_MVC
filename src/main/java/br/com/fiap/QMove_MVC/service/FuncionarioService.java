@@ -1,31 +1,44 @@
 package br.com.fiap.QMove_MVC.service;
 
+import java.util.List;
 import java.util.Optional;
 
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
 import br.com.fiap.QMove_MVC.model.Funcionario;
 import br.com.fiap.QMove_MVC.repository.FuncionarioRepository;
-import org.springframework.security.oauth2.core.user.OAuth2User;
 
 @Service
 public class FuncionarioService {
 
     private final FuncionarioRepository funcionarioRepository;
+    private final PasswordEncoder passwordEncoder;
 
-    public FuncionarioService(FuncionarioRepository funcionarioRepository) {
+    public FuncionarioService(FuncionarioRepository funcionarioRepository, PasswordEncoder passwordEncoder) {
         this.funcionarioRepository = funcionarioRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
-    public void register(OAuth2User oAuth2User) {
-        String email = oAuth2User.getAttribute("email");
+    public List<Funcionario> listarTodos() {
+        return funcionarioRepository.findAll();
+    }
 
-        Optional<Funcionario> funcionarioExistente = funcionarioRepository.findByEmail(email);
-        if (funcionarioExistente.isEmpty()) {
-            Funcionario funcionario = new Funcionario();
-            funcionario.setEmail(email);
-            funcionario.setNome(oAuth2User.getAttribute("name"));
-            funcionario.setSenha("oauth2"); // senha dummy, não usada
-            funcionarioRepository.save(funcionario);
-        }
+    public Optional<Funcionario> buscarPorId(Long id) {
+        return funcionarioRepository.findById(id);
+    }
+
+    public Optional<Funcionario> buscarPorEmail(String email) {
+        return funcionarioRepository.findByEmail(email);
+    }
+
+    public Funcionario salvar(Funcionario funcionario) {
+        // Criptografa a senha antes de salvar
+        funcionario.setSenha(passwordEncoder.encode(funcionario.getSenha()));
+        return funcionarioRepository.save(funcionario);
+    }
+
+    public void excluir(Long id) {
+        funcionarioRepository.deleteById(id);
     }
 }

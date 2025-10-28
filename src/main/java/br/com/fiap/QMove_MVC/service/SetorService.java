@@ -1,11 +1,12 @@
 package br.com.fiap.QMove_MVC.service;
 
-import br.com.fiap.QMove_MVC.model.Setor;
-import br.com.fiap.QMove_MVC.repository.SetorRepository;
-import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.Optional;
+
+import org.springframework.stereotype.Service;
+
+import br.com.fiap.QMove_MVC.model.Setor;
+import br.com.fiap.QMove_MVC.repository.SetorRepository;
 
 @Service
 public class SetorService {
@@ -16,19 +17,23 @@ public class SetorService {
         this.setorRepository = setorRepository;
     }
 
-    public List<Setor> findAll() {
+    public List<Setor> listarTodos() {
         return setorRepository.findAll();
     }
 
-    public Optional<Setor> findById(Long id) {
+    public Optional<Setor> buscarPorId(Long id) {
         return setorRepository.findById(id);
     }
 
-    public Setor save(Setor setor) {
+    public Setor salvar(Setor setor) {
         return setorRepository.save(setor);
     }
 
-    public void deleteById(Long id) {
+    public void excluir(Long id) {
         setorRepository.deleteById(id);
+    }
+
+    public Setor buscarPorNome(String nome) {
+        return setorRepository.findByNome(nome);
     }
 }

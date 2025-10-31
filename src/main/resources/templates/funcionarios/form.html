@@ -1,0 +1,37 @@
+<form th:action="@{/funcionarios/salvar}" method="post" th:object="${funcionario}">
+    <input type="hidden" th:field="*{id}">
+
+    <div>
+        <label>Nome:</label>
+        <input type="text" th:field="*{nome}">
+        <small th:if="${#fields.hasErrors('nome')}" 
+               th:errors="*{nome}" 
+               style="color:red"></small>
+    </div>
+
+    <div>
+        <label>Email:</label>
+        <input type="email" th:field="*{email}">
+        <small th:if="${#fields.hasErrors('email')}" 
+               th:errors="*{email}" 
+               style="color:red"></small>
+    </div>
+
+    <div>
+        <label>Senha:</label>
+        <input type="password" th:field="*{senha}">
+        <small th:if="${#fields.hasErrors('senha')}" 
+               th:errors="*{senha}" 
+               style="color:red"></small>
+    </div>
+
+    <div>
+        <label>Ativo:</label>
+        <input type="checkbox" th:field="*{ativo}">
+    </div>
+
+    <div>
+        <button type="submit">Salvar</button>
+        <a th:href="@{/funcionarios}">Cancelar</a>
+    </div>
+</form>

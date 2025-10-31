@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head><title>Setores</title></head>
+<body>
+<div th:replace="fragments/header :: header"></div>
+<div th:replace="fragments/menu :: menu"></div>
+
+<h2>Setores</h2>
+<a th:href="@{/setores/novo}">➕ Novo Setor</a>
+
+<table border="1" cellpadding="5">
+    <tr>
+        <th>ID</th>
+        <th>Nome</th>
+        <th>Código</th>
+        <th>Ações</th>
+    </tr>
+    <tr th:each="s : ${setores}">
+        <td th:text="${s.id}"></td>
+        <td th:text="${s.nome}"></td>
+        <td th:text="${s.codigo}"></td>
+        <td>
+            <a th:href="@{|/setores/editar/${s.id}|}">Editar</a> |
+            <a th:href="@{|/setores/excluir/${s.id}|}">Excluir</a>
+        </td>
+    </tr>
+</table>
+
+<div th:replace="fragments/footer :: footer"></div>
+</body>
+</html>

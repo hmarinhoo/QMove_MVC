@@ -1,0 +1,24 @@
+<form th:action="@{/setores/salvar}" method="post" th:object="${setor}">
+    <input type="hidden" th:field="*{id}">
+    
+    <div>
+        <label>Nome:</label>
+        <input type="text" th:field="*{nome}">
+        <small th:if="${#fields.hasErrors('nome')}" 
+               th:errors="*{nome}" 
+               style="color:red"></small>
+    </div>
+    
+    <div>
+        <label>Código:</label>
+        <input type="text" th:field="*{codigo}">
+        <small th:if="${#fields.hasErrors('codigo')}" 
+               th:errors="*{codigo}" 
+               style="color:red"></small>
+    </div>
+
+    <div>
+        <button type="submit">Salvar</button>
+        <a th:href="@{/setores}">Cancelar</a>
+    </div>
+</form>

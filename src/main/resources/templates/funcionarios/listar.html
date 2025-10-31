@@ -1,0 +1,34 @@
+<!-- Só para admin  -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head><title>Funcionários</title></head>
+<body>
+<div th:replace="fragments/header :: header"></div>
+<div th:replace="fragments/menu :: menu"></div>
+
+<h2>Funcionários</h2>
+<a th:href="@{/funcionarios/novo}">➕ Novo Funcionário</a>
+
+<table border="1" cellpadding="5">
+    <tr>
+        <th>ID</th>
+        <th>Nome</th>
+        <th>Email</th>
+        <th>Ativo</th>
+        <th>Ações</th>
+    </tr>
+    <tr th:each="f : ${funcionarios}">
+        <td th:text="${f.id}"></td>
+        <td th:text="${f.nome}"></td>
+        <td th:text="${f.email}"></td>
+        <td th:text="${f.ativo ? 'Sim' : 'Não'}"></td>
+        <td>
+            <a th:href="@{|/funcionarios/editar/${f.id}|}">Editar</a> |
+            <a th:href="@{|/funcionarios/excluir/${f.id}|}">Excluir</a>
+        </td>
+    </tr>
+</table>
+
+<div th:replace="fragments/footer :: footer"></div>
+</body>
+</html>

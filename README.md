@@ -1,27 +1,27 @@
 # QMove – Sistema de Gestão de Pátio da Mottu
 
-O QMove é uma solução tecnológica desenvolvida para a Mottu com o objetivo de otimizar a gestão do pátio, facilitando a organização, identificação e localização das motocicletas de forma ágil, precisa e digital.
+O **QMove** é uma solução tecnológica desenvolvida para a Mottu com o objetivo de otimizar a gestão do pátio, facilitando a organização, identificação e localização das motocicletas de forma ágil, precisa e digital.
 
-Através da integração entre backend robusto, aplicativo móvel e tecnologia baseada em QR Code, o QMove transforma um processo tradicionalmente manual em uma operação automatizada, segura e escalável.
+Através da integração entre um backend robusto, aplicativo móvel e tecnologia baseada em QR Code, o QMove transforma um processo tradicionalmente manual em uma operação automatizada, segura e escalável.
 
 ---
 
 ## 👥 Integrantes
 
-- 👩‍💻 Hellen Marinho Cordeiro – RM: 558841  
-- 👩‍💻 Heloisa Alves de Mesquita – RM: 559145
+- 👩‍💻 **Hellen Marinho Cordeiro** – RM: 558841
+- 👩‍💻 **Heloisa Alves de Mesquita** – RM: 559145
 
 ---
 
 ## Tecnologias Utilizadas
 
-- **Java 21**  
-- **Spring Boot 3.x**  
-- **Spring Security** (login via formulário + OAuth2 GitHub)  
-- **Thymeleaf** (renderização de páginas HTML, com fragmentos para cabeçalho, rodapé e menu)  
-- **Flyway** (versionamento do banco de dados)  
-- **PostgreSQL**  
-- **Docker / Docker Compose**  
+- **Java 21**
+- **Spring Boot 3.x**
+- **Spring Security** (autenticação e controle de acesso)
+- **Thymeleaf** (renderização de páginas HTML com fragmentos para cabeçalho, rodapé e menu)
+- **Flyway** (versionamento do banco de dados)
+- **PostgreSQL**
+- **Docker / Docker Compose**
 
 ---
 
@@ -29,53 +29,51 @@ Através da integração entre backend robusto, aplicativo móvel e tecnologia b
 
 Antes de executar a aplicação, certifique-se de ter instalado:
 
-- Java 21 ou superior  
-- Docker e Docker Compose  
-- Git (para clonar o repositório)  
+- **Java 21 ou superior**
+- **Docker e Docker Compose**
+- **Git** (para clonar o repositório)
 
 ---
 
 ## ⚙️ Configuração
 
-### 1. Clonar o repositório
+1. **Clonar o repositório:**
+
+   ```bash
+   git clone https://github.com/hmarinhoo/QMove_MVC
+   cd QMove_MVC
+   
+2. Configuração do Banco de Dados
+
+A aplicação utiliza o **Flyway** para controle de versões do banco de dados. O **PostgreSQL** é utilizado como banco de dados principal. Para configurá-lo, execute o Docker Compose para criar o contêiner do banco.
 
 ```bash
-git clone https://github.com/hmarinhoo/QMove_MVC
-cd QMove_MVC
+docker-compose up
+
 ```
+3. Configuração da Aplicação e Autenticação
 
-### 2. Configuração da Autenticação com GitHub (OAuth2)
+A autenticação no sistema é realizada via **Spring Security**. Dois perfis de usuário estão disponíveis:
 
-Para rodar a aplicação com login via GitHub, siga os passos abaixo:
+- **Admin**:
+  - **Email**: `admin@mottu.com`
+  - **Senha**: `admin123`
+  - **Papel**: Admin (acesso total a todas as funcionalidades)
 
-1. **Acesse o GitHub Developer Settings**  
-   - Vá para: [https://github.com/settings/developers](https://github.com/settings/developers)  
-   - Clique em **OAuth Apps** no menu lateral  
-   - Clique em **New OAuth App**
+- **Funcionário**:
+  - **Email**: `funcionario@mottu.com`
+  - **Senha**: `func123`
+  - **Papel**: User (acesso a motos e setores)
 
-2. **Preencha os dados do aplicativo**  
-   - **Application name:** QMove Local (ou qualquer nome de sua preferência)  
-   - **Homepage URL:** http://localhost:8080  
-   - **Authorization callback URL:** http://localhost:8080/login/oauth2/code/github  
-   - Clique em **Register application**
+Esses usuários já estão preconfigurados no banco de dados para facilitar o início dos testes.
 
-3. **Copie as credenciais**  
-   - Clique em **Generate a new client secret** (se ainda não tiver)  
-   - Copie os dois valores:  
-     - **Client ID** (ex: a1b2c3d4e5f6...)  
-     - **Client Secret** (ex: ghs_abc123xyz...) → guarde com cuidado!
+4. Configuração do `application.properties`
 
-4. **Configure as variáveis no seu projeto**  
-   - Edite o arquivo `src/main/resources/application.properties` e adicione/substitua:
+No arquivo `src/main/resources/application.properties`, o **Spring Security** está configurado para usar autenticação baseada em usuários e senhas no banco de dados. Caso queira ajustar ou adicionar mais usuários, basta modificar esse arquivo.
 
-```properties
-spring.security.oauth2.client.registration.github.client-id=SEU_CLIENT_ID_AQUI
-spring.security.oauth2.client.registration.github.client-secret=SEU_CLIENT_SECRET_AQUI
-```
+## Acesso e Funcionalidades
 
-5. Substituição das credenciais
-
-Substitua `SEU_CLIENT_ID_AQUI` e `SEU_CLIENT_SECRET_AQUI` pelos valores copiados do GitHub no arquivo `src/main/resources/application.properties`.
-
+- **Admin** tem acesso completo, podendo gerenciar todas as funcionalidades do sistema.
+- **Funcionário** tem acesso limitado, podendo visualizar e gerenciar motos e setores dentro do pátio.
 
 

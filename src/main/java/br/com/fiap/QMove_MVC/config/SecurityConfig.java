@@ -2,7 +2,6 @@ package br.com.fiap.QMove_MVC.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -11,49 +10,42 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 public class SecurityConfig {
 
-    private final CustomUserDetailsService userDetailsService;
-
-    public SecurityConfig(CustomUserDetailsService userDetailsService) {
-        this.userDetailsService = userDetailsService;
-    }
-
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
     @Bean
-    public DaoAuthenticationProvider authenticationProvider() {
-        DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
-        authProvider.setUserDetailsService(userDetailsService);
-        authProvider.setPasswordEncoder(passwordEncoder());
-        return authProvider;
-    }
-
-    @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
+            // Desativa CSRF temporariamente (só se ainda não tem <input name="_csrf"> nos forms)
+            .csrf(csrf -> csrf.disable())
+
             .authorizeHttpRequests(auth -> auth
-                // Libera acesso à página inicial e ao login
-                .requestMatchers("/", "/login", "/css/**", "/js/**").permitAll()
-                // Somente ADMIN pode acessar as rotas de funcionários
+                // Libera acesso às páginas públicas
+                .requestMatchers("/", "/home", "/login", "/css/**", "/js/**", "/images/**").permitAll()
+
+                // Somente ADMIN pode acessar funcionários
                 .requestMatchers("/funcionarios/**").hasRole("ADMIN")
-                // Rotas de setores podem ser acessadas por ADMIN e USER
+
+                // ADMIN e USER podem acessar setores
                 .requestMatchers("/setores/**").hasAnyRole("ADMIN", "USER")
-                // Qualquer outra rota precisa de autenticação
+
+                // Qualquer outra rota precisa de login
                 .anyRequest().authenticated()
             )
+
             .formLogin(form -> form
-                .loginPage("/login")           // página customizada de login
-                .defaultSuccessUrl("/home", true)
+                .loginPage("/login")            // rota da página de login (deve existir em Controller)
+                .defaultSuccessUrl("/home", true) // pra onde vai depois de logar
                 .permitAll()
             )
+
             .logout(logout -> logout
                 .logoutUrl("/logout")
                 .logoutSuccessUrl("/login?logout")
                 .permitAll()
-            )
-            .authenticationProvider(authenticationProvider());
+            );
 
         return http.build();
     }

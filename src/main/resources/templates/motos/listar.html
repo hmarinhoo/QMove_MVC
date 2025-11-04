@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Motos - QMove</title>
+    <div th:replace="fragments/header :: header"></div>
+</head>
+<body>
+    <div th:replace="fragments/menu :: menu"></div>    <div class="container">
+        <div class="card">
+            <h2><i class="fas fa-motorcycle"></i> Gerenciamento de Motos</h2>
+            <div style="margin: 20px 0;">
+                <a th:href="@{/motos/novo}" class="btn"><i class="fas fa-plus-circle"></i> Nova Moto</a>
+            </div>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Placa</th>
+                        <th>Modelo</th>
+                        <th>Status</th>
+                        <th>Setor</th>
+                        <th style="text-align: center;">Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="m : ${motos}">
+                        <td th:text="${m.id}"></td>
+                        <td th:text="${m.placa}"></td>
+                        <td th:text="${m.modelo}"></td>                        <td>
+                            <span th:if="${m.status == 'Disponível'}" 
+                                  style="background: #d4edda; color: #155724; padding: 5px 10px; border-radius: 5px; font-weight: bold;">
+                                <i class="fas fa-check-circle"></i> <span th:text="${m.status}"></span>
+                            </span>
+                            <span th:if="${m.status == 'Em Uso'}" 
+                                  style="background: #fff3cd; color: #856404; padding: 5px 10px; border-radius: 5px; font-weight: bold;">
+                                <i class="fas fa-shipping-fast"></i> <span th:text="${m.status}"></span>
+                            </span>
+                            <span th:if="${m.status == 'Manutenção'}" 
+                                  style="background: #f8d7da; color: #721c24; padding: 5px 10px; border-radius: 5px; font-weight: bold;">
+                                <i class="fas fa-wrench"></i> <span th:text="${m.status}"></span>
+                            </span>
+                        </td>
+                        <td>
+                            <span th:if="${m.setor != null}" 
+                                  style="background: #52764B; color: white; padding: 5px 10px; border-radius: 5px;">
+                                <i class="fas fa-map-marker-alt"></i> <span th:text="${m.setor.nome}"></span>
+                            </span>
+                            <span th:if="${m.setor == null}" style="color: #999;">Sem setor</span>
+                        </td>
+                        <td style="text-align: center;">
+                            <a th:href="@{|/motos/editar/${m.id}|}" class="btn btn-sm"><i class="fas fa-edit"></i> Editar</a>
+                            <a th:href="@{|/motos/excluir/${m.id}|}" class="btn btn-sm btn-danger"
+                               onclick="return confirm('Tem certeza que deseja excluir esta moto?')"><i class="fas fa-trash"></i> Excluir</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div th:replace="fragments/footer :: footer"></div>
+</body>
+</html>

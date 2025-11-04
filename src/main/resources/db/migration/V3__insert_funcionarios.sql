@@ -2,7 +2,7 @@
 -- Senha: admin123 (vai ser criptografada na aplicação com BCrypt na inicialização)
 
 INSERT INTO funcionario (nome, email, senha, ativo)
-VALUES ('Administrador', 'admin@mottu.com', '$2a$10$DlS6b9vlP0xL2TPZJYoBbe7N6vQhM/JQbqJfPsFr6vWBaXP2TjFiC', TRUE);
+VALUES ('Administrador', 'admin@mottu.com', '$2a$12$n4tzLB0CygZ16Q2.I5Hs1eZEn9DDt5Q4O7tFSCugJ5fCJQQSssx3y', TRUE);
 
 -- Atribui o papel ADMIN ao usuário administrador
 INSERT INTO funcionario_roles (funcionario_id, role_id)

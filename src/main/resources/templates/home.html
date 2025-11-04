@@ -2,15 +2,16 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>QMove - Home</title>
+    <div th:replace="fragments/header :: header"></div>
 </head>
 <body>
-    <div th:replace="fragments/header :: header"></div>
-    <div th:replace="fragments/menu :: menu"></div>
-
-    <main style="padding:20px;">
-        <h2>Bem-vindo(a) ao Sistema QMove Web 🚀</h2>
-        <p>Use o menu acima para navegar entre os módulos.</p>
-    </main>
+    <div th:replace="fragments/menu :: menu"></div>    <div class="container">
+        <div class="card welcome-section">
+            <h2><i class="fas fa-rocket"></i> Bem-vindo(a) ao Sistema QMove Web</h2>
+            <p>Use o menu acima para navegar entre os módulos do sistema.</p>
+            <p style="margin-top: 20px;">Gerencie setores e funcionários de forma eficiente e moderna!</p>
+        </div>
+    </div>
 
     <div th:replace="fragments/footer :: footer"></div>
 </body>

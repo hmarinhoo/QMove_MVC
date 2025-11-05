@@ -1,5 +1,4 @@
 # QMove – Sistema de Gestão de Pátio da Mottu
-# QMove MVC - Sistema de Gestão de Pátio de Motos
 
 ## 👥 Integrantes
 * 👩‍💻 Hellen Marinho Cordeiro - RM: 558841
@@ -31,7 +30,6 @@ Automatizar o controle de motos no pátio através de:
 - **Thymeleaf** - Template Engine para views
 - **Flyway** - Versionamento de Banco de Dados
 - **MySQL** - Banco de Dados Relacional
-- **Bootstrap 5** - Framework CSS
 - **Maven** - Gerenciamento de Dependências
 
 ## 🏗️ Arquitetura do Projeto
@@ -58,8 +56,8 @@ src/
 │       │   ├── css/
 │       │   ├── js/
 │       │   └── img/
-│       └── db/migration/    # Scripts Flyway (mínimo 4 versões)
-└── test/                    # Testes unitários e integração
+│       └── db/migration/    # Scripts Flyway 
+└── test/                    
 ```
 
 ## ✨ Funcionalidades por Perfil de Usuário
@@ -72,7 +70,7 @@ O perfil de Administrador possui controle completo sobre o sistema:
 - ✅ **Cadastro** de novas motos
 - ✅ **Edição** de informações existentes
 - ✅ **Exclusão** de motos
-- ✅ **Listagem** completa com filtros
+- ✅ **Listagem** completa 
 - ✅ **Visualização** de detalhes e QR Code
 
 #### 📍 Gestão de Setores
@@ -196,50 +194,24 @@ http://localhost:8080
 - Senha: `func123`
 - **Permissões:** Gestão de motos + visualização de setores
 
-## 📦 Build e Deploy
-
-### Gerar JAR
-```bash
-mvn clean package
-```
-
-### Executar JAR
-```bash
-java -jar target/qmove-0.0.1-SNAPSHOT.jar
-```
+## 📦 Deploy
 
 ### Deploy em Produção
 Aplicação preparada para deploy em:
-- Render
+- [[Render](https://qmove-mvc.onrender.com)
+](https://qmove-mvc.onrender.com)
+## 💡 Fluxo Completo da Solução (Mobile)
 
-## 🧪 Validações Implementadas
+**A solução completa QMove funciona via aplicativo mobile:**
 
-### Validações de Motos:
-- ✅ Placa no formato Mercosul (ABC1D23)
-- ✅ Placa única no sistema
-- ✅ Modelo obrigatório (mín. 3 caracteres)
-- ✅ Ano entre 1990 e ano atual
-- ✅ Cor obrigatória
-- ✅ Setor obrigatório e existente
-
-### Validações de Setores:
-- ✅ Nome único (mín. 3 caracteres)
-- ✅ Capacidade mínima de 1 moto
-- ✅ Descrição opcional
-- ✅ Verificação de motos antes de exclusão
-
-### Validações de Funcionários:
-- ✅ E-mail válido e único
-- ✅ Senha forte (mín. 6 caracteres)
-- ✅ Perfil obrigatório
-
-
-### 💡 Fluxo Completo da Solução:
-1. **Cadastro (MVC):** Admin ou Funcionário cadastra moto → sistema gera QR Code único
+1. **Cadastro (Mobile):** Funcionário cadastra moto no app → sistema gera QR Code único
 2. **Identificação (IoT):** QR Code físico é impresso e fixado na moto
-3. **Operação (Mobile):** Funcionário em campo escaneia QR Code com smartphone
-4. **Consulta (API):** Sistema retorna dados da moto e localização atual
-6. **Visualização (MVC):** Administradores monitoram em tempo real pelo dashboard
+3. **Escaneamento (Mobile):** Funcionário escaneia QR Code diretamente no app
+4. **Consulta (API REST):** App consome a API e retorna todos os dados da moto em tempo real
+5. **Visualização Completa (Mobile):** App exibe informações detalhadas: placa, modelo, ano, cor, setor atual, histórico de movimentações e permite movimentação entre setores
+
+> **⚠️ Sobre esta versão MVC:** Esta aplicação web foi desenvolvida como uma entrega complementar do projeto acadêmico. Como a interface web não possui funcionalidade de leitura de QR Code (recurso exclusivo do mobile), o MVC serve apenas para **visualizar e gerenciar cadastros básicos** consumindo os mesmos endpoints da API REST. **A solução completa e funcional do QMove é 100% mobile.**
+```
 
 
 **Equipe:**
@@ -247,3 +219,4 @@ Aplicação preparada para deploy em:
 - Heloisa Alves de Mesquita - RM: 559145
 
 ---
+

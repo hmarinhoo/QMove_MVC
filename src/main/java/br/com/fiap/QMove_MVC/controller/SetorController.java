@@ -20,7 +20,15 @@ public class SetorController {
 
     @GetMapping
     public String listar(Model model) {
-        model.addAttribute("setores", setorService.listarTodos());
+        var setores = setorService.listarTodos();
+        model.addAttribute("setores", setores);
+
+        // Calcula a quantidade de motos por setor e adiciona ao modelo (map setorId -> count)
+        java.util.Map<Long, Long> setorCounts = new java.util.HashMap<>();
+        for (var s : setores) {
+            setorCounts.put(s.getId(), setorService.contarMotosPorSetorId(s.getId()));
+        }
+        model.addAttribute("setorCounts", setorCounts);
         return "setores/listar";
     }
 
@@ -48,8 +56,13 @@ public class SetorController {
     }
 
     @GetMapping("/excluir/{id}")
-    public String excluir(@PathVariable Long id) {
-        setorService.excluir(id);
+    public String excluir(@PathVariable Long id, org.springframework.web.servlet.mvc.support.RedirectAttributes redirectAttributes) {
+        try {
+            setorService.excluir(id);
+            redirectAttributes.addFlashAttribute("success", "Setor excluído com sucesso.");
+        } catch (IllegalStateException e) {
+            redirectAttributes.addFlashAttribute("error", e.getMessage());
+        }
         return "redirect:/setores";
     }
 }

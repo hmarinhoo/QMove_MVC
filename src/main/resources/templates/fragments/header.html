@@ -97,6 +97,37 @@
             margin-bottom: 20px;
         }
 
+        /* Card headers and icons */
+        .card h2 {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.6rem;
+            margin: 0 0 20px 0;
+            color: #3d5838;
+        }
+
+        /* Icon spacing inside buttons and headings */
+        .btn i, .card h2 .icon {
+            margin-right: 8px;
+            font-size: 1em;
+            vertical-align: middle;
+        }
+
+        /* Status badges */
+        .badge {
+            display: inline-block;
+            padding: 6px 10px;
+            border-radius: 999px;
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+
+        .badge-available { background: #d4edda; color: #155724; }
+        .badge-inuse { background: #fff3cd; color: #856404; }
+        .badge-maintenance { background: #f8d7da; color: #721c24; }
+        .badge-pending { background: #e2e3e5; color: #6c757d; }
+
         .btn {
             display: inline-block;
             padding: 12px 24px;
@@ -189,6 +220,17 @@
             transition: border-color 0.3s ease;
         }
 
+        /* Form controls (selects, inputs) */
+        .form-control {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s ease;
+            background: white;
+        }
+
         .form-group input:focus {
             outline: none;
             border-color: #52764B;
@@ -210,6 +252,7 @@
             display: flex;
             gap: 10px;
             margin-top: 20px;
+            justify-content: flex-end;
         }
 
         footer {

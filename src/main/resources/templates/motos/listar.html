@@ -15,7 +15,7 @@
             <table>
                 <thead>
                     <tr>
-                        <th>ID</th>
+                        <th>QR Code</th>
                         <th>Placa</th>
                         <th>Modelo</th>
                         <th>Status</th>
@@ -25,32 +25,31 @@
                 </thead>
                 <tbody>
                     <tr th:each="m : ${motos}">
-                        <td th:text="${m.id}"></td>
+                        <td th:text="${m.qrcode}"></td>
                         <td th:text="${m.placa}"></td>
                         <td th:text="${m.modelo}"></td>                        <td>
-                            <span th:if="${m.status == 'Disponível'}" 
-                                  style="background: #d4edda; color: #155724; padding: 5px 10px; border-radius: 5px; font-weight: bold;">
+                            <span th:if="${m.status == 'Disponível'}" class="badge badge-available">
                                 <i class="fas fa-check-circle"></i> <span th:text="${m.status}"></span>
                             </span>
-                            <span th:if="${m.status == 'Em Uso'}" 
-                                  style="background: #fff3cd; color: #856404; padding: 5px 10px; border-radius: 5px; font-weight: bold;">
+                            <span th:if="${m.status == 'Em Uso'}" class="badge badge-inuse">
                                 <i class="fas fa-shipping-fast"></i> <span th:text="${m.status}"></span>
                             </span>
-                            <span th:if="${m.status == 'Manutenção'}" 
-                                  style="background: #f8d7da; color: #721c24; padding: 5px 10px; border-radius: 5px; font-weight: bold;">
+                            <span th:if="${m.status == 'Pendente'}" class="badge badge-pending">
+                                <i class="fas fa-hourglass-half"></i> <span th:text="${m.status}"></span>
+                            </span>
+                            <span th:if="${m.status == 'Manutenção'}" class="badge badge-maintenance">
                                 <i class="fas fa-wrench"></i> <span th:text="${m.status}"></span>
                             </span>
                         </td>
                         <td>
-                            <span th:if="${m.setor != null}" 
-                                  style="background: #52764B; color: white; padding: 5px 10px; border-radius: 5px;">
+                            <span th:if="${m.setor != null}" class="badge" style="background:#52764B; color:white;">
                                 <i class="fas fa-map-marker-alt"></i> <span th:text="${m.setor.nome}"></span>
                             </span>
                             <span th:if="${m.setor == null}" style="color: #999;">Sem setor</span>
                         </td>
                         <td style="text-align: center;">
-                            <a th:href="@{|/motos/editar/${m.id}|}" class="btn btn-sm"><i class="fas fa-edit"></i> Editar</a>
-                            <a th:href="@{|/motos/excluir/${m.id}|}" class="btn btn-sm btn-danger"
+                            <a th:href="@{|/motos/editar/qrcode/${m.qrcode}|}" class="btn btn-sm"><i class="fas fa-edit"></i> Editar</a>
+                            <a th:href="@{|/motos/excluir/qrcode/${m.qrcode}|}" class="btn btn-sm btn-danger"
                                onclick="return confirm('Tem certeza que deseja excluir esta moto?')"><i class="fas fa-trash"></i> Excluir</a>
                         </td>
                     </tr>

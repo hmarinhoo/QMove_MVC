@@ -4,6 +4,7 @@ public enum StatusMoto {
     DISPONIVEL("Disponível"),
     EM_USO("Em Uso"),
     MANUTENCAO("Manutenção"),
+    PENDENTE("Pendente"),
     INATIVA("Inativa");
 
     private final String descricao;

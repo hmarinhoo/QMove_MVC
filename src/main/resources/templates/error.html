@@ -49,7 +49,7 @@
 
     <div class="container">
         <div class="card error-container">
-            <div class="error-icon">⚠️</div>
+            <div class="error-icon"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i></div>
             <div class="error-code" th:text="${status}">Erro</div>
             <div class="error-message">Algo deu errado!</div>
             <div class="error-description">
@@ -58,8 +58,8 @@
                 <p>Nossa equipe foi notificada e estamos trabalhando para resolver o problema.</p>
             </div>
             <div class="error-actions">
-                <a th:href="@{/home}" class="btn">🏠 Voltar para Home</a>
-                <a href="javascript:history.back()" class="btn btn-secondary">↩️ Voltar</a>
+                <a th:href="@{/home}" class="btn"><i class="fas fa-home"></i> Voltar para Home</a>
+                <a href="javascript:history.back()" class="btn btn-secondary"><i class="fas fa-arrow-left"></i> Voltar</a>
             </div>
         </div>
     </div>

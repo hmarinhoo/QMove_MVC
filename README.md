@@ -214,9 +214,3 @@ Aplicação preparada para deploy em:
 ```
 
 
-**Equipe:**
-- Hellen Marinho Cordeiro - RM: 558841
-- Heloisa Alves de Mesquita - RM: 559145
-
----
-

@@ -19,6 +19,26 @@ Automatizar o controle de motos no pátio através de:
 - Interface administrativa intuitiva
 - Controle de acesso seguro com diferentes perfis
 
+## 🎥 Demonstração em Vídeo
+
+### 📱 Solução Completa - Aplicativo Mobile
+**Vídeo demonstrando a solução QMove completa funcionando no aplicativo mobile:**
+
+🔗 **Link do vídeo:** `https://www.youtube.com/watch?v=RJXuWdSOUS4`
+
+> Este vídeo mostra o fluxo completo: cadastro de motos, geração de QR Code, escaneamento, consulta de dados em tempo real e movimentação entre setores.
+
+---
+
+### 💻 Aplicação MVC - Interface Web Administrativa
+**Vídeo demonstrando a versão web (MVC) do sistema:**
+
+🔗 **Link do vídeo:** `https://youtu.be/9Ua-k7f1iWI`
+
+> Este vídeo apresenta a interface administrativa web para gestão de motos, setores e funcionários.
+
+---
+
 ## 🚀 Tecnologias Utilizadas
 
 - **Java 17+**
@@ -126,12 +146,11 @@ public enum Role {
 
 ## 🗄️ Versionamento do Banco de Dados (Flyway)
 
- A aplicação utiliza PostgreSQL e o Flyway para migração automática do banco de dados. As migrações estão localizadas em:
+A aplicação utiliza PostgreSQL e o Flyway para migração automática do banco de dados. As migrações estão localizadas em:
  
- ```
+```
 src/main/resources/db/migration/
- ```
-
+```
 
 ## 🚀 Como Executar o Projeto
 
@@ -198,8 +217,8 @@ http://localhost:8080
 
 ### Deploy em Produção
 Aplicação preparada para deploy em:
-- [[Render](https://qmove-mvc.onrender.com)
-](https://qmove-mvc.onrender.com)
+- [Render - https://qmove-mvc.onrender.com](https://qmove-mvc.onrender.com)
+
 ## 💡 Fluxo Completo da Solução (Mobile)
 
 **A solução completa QMove funciona via aplicativo mobile:**
@@ -211,6 +230,9 @@ Aplicação preparada para deploy em:
 5. **Visualização Completa (Mobile):** App exibe informações detalhadas: placa, modelo, ano, cor, setor atual, histórico de movimentações e permite movimentação entre setores
 
 > **⚠️ Sobre esta versão MVC:** Esta aplicação web foi desenvolvida como uma entrega complementar do projeto acadêmico. Como a interface web não possui funcionalidade de leitura de QR Code (recurso exclusivo do mobile), o MVC serve apenas para **visualizar e gerenciar cadastros básicos** consumindo os mesmos endpoints da API REST. **A solução completa e funcional do QMove é 100% mobile.**
-```
 
+---
 
+## 📄 Licença
+
+Este projeto foi desenvolvido como trabalho acadêmico para a FIAP.
